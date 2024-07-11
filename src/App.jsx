@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Navbar from "./Components/Navbar";
@@ -7,7 +7,9 @@ import Products from "./Components/Products/Products";
 import AboutUs from "./Components/AboutUs";
 import Cart from "./Components/Cart";
 import IndividualPage from "./Components/Products/IndividualPage";
+import searchContext from "./Components/utils/context";
 function App() {
+  const [searchInp, setSearchInp] = useState("");
   const appRoutes = createBrowserRouter([
     {
       element: <Navbar />,
@@ -38,7 +40,9 @@ function App() {
   ]);
   return (
     <>
-      <RouterProvider router={appRoutes} />
+      <searchContext.Provider value={{searchInp,setSearchInp}}>
+        <RouterProvider router={appRoutes} />
+      </searchContext.Provider>
     </>
   );
 }
