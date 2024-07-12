@@ -27,7 +27,7 @@ const Navbar = () => {
     <>
       <nav className="bg-blue-500 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-white font-bold text-xl">My Website</div>
+          <div className="text-white font-bold text-xl">Big Basket 2.0</div>
           <div className="flex space-x-4 items-center">
             {links.map((elem) => (
               <Link

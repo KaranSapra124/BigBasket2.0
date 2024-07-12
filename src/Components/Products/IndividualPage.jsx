@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Button, Modal } from "antd";
 import { FaRupeeSign } from "react-icons/fa";
 import SimilarProducts from "./SimilarProducts";
+import { BiCartAdd } from "react-icons/bi";
 
 const IndividualPage = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -20,9 +21,30 @@ const IndividualPage = () => {
   const location = useLocation();
   const { state } = location;
   const { item, products } = state;
-  const { title, brand, images, description, price, rating, category, id } =
-    item;
+  const {
+    title,
+    brand,
+    images,
+    description,
+    price,
+    rating,
+    category,
+    id,
+    thumbnail,
+  } = item;
   const str = "⭐";
+
+  const handleAddToCart = (item) => {
+    if (localStorage.getItem("big_basket_cart")) {
+      //If Any Value Exists In Cart
+      const parsedArr = JSON.parse(localStorage.getItem("big_basket_cart")); //Calling the existing data
+      parsedArr.push(item); //Storing new data into the cart
+      localStorage.setItem("big_basket_cart", JSON.stringify(parsedArr)); //Updating the localstorage with updated cart
+    } else {
+      //When their is nothing inside the cart
+      localStorage.setItem("big_basket_cart", JSON.stringify([item]));
+    }
+  };
 
   useEffect(() => {
     setFilteredProducts(() => {
@@ -30,7 +52,7 @@ const IndividualPage = () => {
         return elem.category === category && elem.id !== id;
       });
     });
-  },[]);
+  }, []);
   return (
     <>
       <div className="border m-5 p-2 rounded flex flex-col justify-center  ">
@@ -68,9 +90,22 @@ const IndividualPage = () => {
           <div className="bg-green-500 p-2 rounded mt-2">
             {str.repeat(rating)}
           </div>
+
+          <button
+            onClick={() =>
+              handleAddToCart({
+                title: title,
+                price: price,
+                image: thumbnail,
+              })
+            }
+            className="bg-black text-white w-72 m-auto mt-2 text-xl text-center"
+          >
+            <BiCartAdd />
+          </button>
         </div>
       </div>
-      <SimilarProducts similarProducts={filteredProducts}/>
+      <SimilarProducts similarProducts={filteredProducts} />
     </>
   );
 };

@@ -1,9 +1,19 @@
 import { Card } from "antd";
 import React from "react";
 import { FaIndianRupeeSign } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const SimilarProducts = ({ similarProducts }) => {
+  const navigate = useNavigate()
   const str = "⭐";
+  const handleOpenProduct = (item) => {
+    navigate("/prodInfo", {
+      state: {
+        item: item,
+        products: products,
+      },
+    });
+  };
   return (
     <>
       <h1 className="text-center text-2xl p-8 font-semibold max-[500px]:animate-pulse  ">

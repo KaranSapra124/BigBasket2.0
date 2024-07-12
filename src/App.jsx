@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Home/Home";
 import Products from "./Components/Products/Products";
 import AboutUs from "./Components/AboutUs";
-import Cart from "./Components/Cart";
+import Cart from "./Components/Cart/Cart";
 import IndividualPage from "./Components/Products/IndividualPage";
 import searchContext from "./Components/utils/context";
 function App() {
