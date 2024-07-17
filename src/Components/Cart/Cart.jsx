@@ -36,7 +36,7 @@ const Cart = () => {
           <h1 className="text-center text-xl ">Your Bill !</h1>
           <hr />
           <div className="flex justify-between">
-            <h2>Your Total!</h2>
+            <h2>Your Total!!</h2>
             {cart.reduce((acc, currVal) => {
               return acc + Math.round(currVal.price * 80);
             }, 0)}
